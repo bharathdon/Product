@@ -1,13 +1,13 @@
 package com.abc.exception;
 
-public class DataNotFoundException extends RuntimeException{
+public class ProductNotFoundException extends RuntimeException{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public DataNotFoundException(String msg) {
+	public ProductNotFoundException(String msg) {
 		super(msg);
 	}
 

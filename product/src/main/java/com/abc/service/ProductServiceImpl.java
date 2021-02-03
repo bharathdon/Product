@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.abc.entity.Product;
-import com.abc.exception.DataNotFoundException;
+import com.abc.exception.ProductNotFoundException;
 import com.abc.repository.ProductRepository;
 
 @Service
