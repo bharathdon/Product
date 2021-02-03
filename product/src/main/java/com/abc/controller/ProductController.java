@@ -84,6 +84,8 @@ public class ProductController {
 		productService.deleteProduct(pid);
 	}
 
+	@Operation(summary = "add a product")
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "product is added") })
 	@PostMapping("/addproduct")
 	public ResponseEntity<Product> addProduct(@Valid @RequestBody Product product) throws SQLException {
 		Product addProduct = productService.addProduct(product);
