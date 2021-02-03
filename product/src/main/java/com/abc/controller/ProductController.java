@@ -23,22 +23,23 @@ import com.abc.exception.ProductsNotFoundException;
 import com.abc.service.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(allowedHeaders = "*")
 
 public class ProductController {
 
 	@Autowired
 	private ProductService productService;
 
-	@Operation(description = "Get all list of products")
+	@Operation(summary = "Get all list of products")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found Products"),
 			@ApiResponse(responseCode = "404", description = "products not found") })
-	@GetMapping(path = "/products", produces = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.TEXT_PLAIN_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE })
+	@GetMapping(path = "/products")
 	public ResponseEntity<List<Product>> getAllProducts() throws SQLException {
 		List<Product> products = productService.getAllProducts();
 		if (products == null || products.isEmpty()) {
@@ -47,13 +48,13 @@ public class ProductController {
 		return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
 	}
 
-	@Operation(description = "Get a product by its id")
+	@Operation(summary = "Get a product by its id")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found Products"),
 			@ApiResponse(responseCode = "404", description = "products not found"),
 			@ApiResponse(responseCode = "400", description = "invalid id supplied") })
-	@GetMapping(path = "product/{pid}", produces = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.TEXT_PLAIN_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<Product> findById(@PathVariable("pid") int pid) throws SQLException {
+	@GetMapping(path = "product/{pid}")
+	public ResponseEntity<Product> findById(@Parameter(description = "id of the product") @PathVariable("pid") int pid)
+			throws SQLException {
 		Product product = productService.findById(pid);
 		if (product.getPid() == null) {
 			throw new ProductsNotFoundException("No product found with pid: " + pid);
@@ -61,22 +62,24 @@ public class ProductController {
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}
 
-	@Operation(description = "update a product by its id")
+	@Operation(summary = "update a product by its id")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = " Product is updated"),
 			@ApiResponse(responseCode = "404", description = "products not found") })
 	@PutMapping(path = "/updateproduct/{pname}/{pid}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.TEXT_PLAIN_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<Product> updateProduct(@PathVariable("pname") String pname, @PathVariable("pid") Integer pid)
-			throws SQLException {
+	public ResponseEntity<Product> updateProduct(
+			@Parameter(description = "name of product") @PathVariable("pname") String pname,
+			@Parameter(description = "id of a product") @PathVariable("pid") Integer pid) throws SQLException {
 		productService.updateProduct(pname, pid);
 		return new ResponseEntity<Product>(HttpStatus.OK);
 	}
 
-	@Operation(description = "delete a product by its id")
+	@Operation(summary = "delete a product by its id")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "product deleted"),
 			@ApiResponse(responseCode = "404", description = "products not found") })
 	@DeleteMapping("/deleteproduct/{pid}")
-	public void deleteProduct(@PathVariable("pid") Integer pid) throws SQLException {
+	public void deleteProduct(@Parameter(description = "id of the product") @PathVariable("pid") Integer pid)
+			throws SQLException {
 		productService.deleteProduct(pid);
 	}
 

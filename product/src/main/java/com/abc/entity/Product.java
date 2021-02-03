@@ -8,8 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,10 +35,13 @@ public class Product implements Serializable {
 	private String pname;
 
 	@NotNull(message = "price ust not be null")
-	private int price;
+	//@NotBlank(message = "price must not be null")
+	private Integer price;
 
+	@DateTimeFormat(pattern = "dd-mm-yy")
 	@Column(name = "purchase_date")
 	private String purchaseDate;
 
-	private int qty;
+	@NotNull(message = "quantity must not be null")
+	private Integer qty;
 }

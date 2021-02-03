@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<CustomErrorResponse> exception(Exception exception, WebRequest request) {
 		CustomErrorResponse customErrorResponse = new CustomErrorResponse();
 		customErrorResponse.setLocalDateTime(LocalDateTime.now(Clock.systemUTC()));
-		customErrorResponse.setError(exception.getMessage());
+		customErrorResponse.setError(exception.getLocalizedMessage());
 		customErrorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
 		return new ResponseEntity<CustomErrorResponse>(customErrorResponse, HttpStatus.BAD_GATEWAY);
 
