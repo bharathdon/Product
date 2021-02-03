@@ -25,6 +25,7 @@ import com.abc.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -37,8 +38,8 @@ public class ProductController {
 	private ProductService productService;
 
 	@Operation(summary = "Get all list of products")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found Products"),
-			@ApiResponse(responseCode = "404", description = "products not found") })
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found Products", content = @Content),
+			@ApiResponse(responseCode = "404", description = "products not found", content = @Content) })
 	@GetMapping(path = "/products")
 	public ResponseEntity<List<Product>> getAllProducts() throws SQLException {
 		List<Product> products = productService.getAllProducts();
@@ -49,9 +50,9 @@ public class ProductController {
 	}
 
 	@Operation(summary = "Get a product by its id")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found Products"),
-			@ApiResponse(responseCode = "404", description = "products not found"),
-			@ApiResponse(responseCode = "400", description = "invalid id supplied") })
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found Products", content = @Content),
+			@ApiResponse(responseCode = "404", description = "products not found", content = @Content),
+			@ApiResponse(responseCode = "400", description = "invalid id supplied", content = @Content) })
 	@GetMapping(path = "product/{pid}")
 	public ResponseEntity<Product> findById(@Parameter(description = "id of the product") @PathVariable("pid") int pid)
 			throws SQLException {
@@ -63,8 +64,8 @@ public class ProductController {
 	}
 
 	@Operation(summary = "update a product by its id")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = " Product is updated"),
-			@ApiResponse(responseCode = "404", description = "products not found") })
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = " Product is updated", content = @Content),
+			@ApiResponse(responseCode = "404", description = "products not found", content = @Content) })
 	@PutMapping(path = "/updateproduct/{pname}/{pid}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.TEXT_PLAIN_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<Product> updateProduct(
@@ -75,8 +76,8 @@ public class ProductController {
 	}
 
 	@Operation(summary = "delete a product by its id")
-	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "product deleted"),
-			@ApiResponse(responseCode = "404", description = "products not found") })
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "product deleted", content = @Content),
+			@ApiResponse(responseCode = "404", description = "products not found", content = @Content) })
 	@DeleteMapping("/deleteproduct/{pid}")
 	public void deleteProduct(@Parameter(description = "id of the product") @PathVariable("pid") Integer pid)
 			throws SQLException {
