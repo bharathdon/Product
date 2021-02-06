@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.abc.entity.Product;
 import com.abc.exception.ProductsNotFoundException;
 import com.abc.service.ProductService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -53,7 +52,7 @@ public class ProductController {
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Found Products", content = @Content),
 			@ApiResponse(responseCode = "404", description = "products not found", content = @Content),
 			@ApiResponse(responseCode = "400", description = "invalid id supplied", content = @Content) })
-	@GetMapping(path = "product/{pid}")
+	@GetMapping(path = "/product/{pid}")
 	public ResponseEntity<Product> findById(@Parameter(description = "id of the product") @PathVariable("pid") int pid)
 			throws SQLException {
 		Product product = productService.findById(pid);

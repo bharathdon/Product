@@ -35,7 +35,7 @@ public class Product implements Serializable {
 	private String pname;
 
 	@NotNull(message = "price ust not be null")
-	//@NotBlank(message = "price must not be null")
+	// @NotBlank(message = "price must not be null")
 	private Integer price;
 
 	@DateTimeFormat(pattern = "dd-mm-yy")
