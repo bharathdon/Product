@@ -1,14 +1,11 @@
 package com.abc.service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.abc.entity.Product;
-import com.abc.exception.ProductNotFoundException;
 import com.abc.repository.ProductRepository;
 
 @Service

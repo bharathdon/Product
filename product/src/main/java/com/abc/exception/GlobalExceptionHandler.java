@@ -25,6 +25,9 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<CustomErrorResponse>(customErrorResponse, HttpStatus.CONFLICT);
 
 	}
+	
+	
+	
 
 	@ExceptionHandler(value = Exception.class)
 	@ResponseStatus(value = HttpStatus.CONFLICT)
@@ -44,7 +47,7 @@ public class GlobalExceptionHandler {
 		CustomErrorResponse customErrorResponse = new CustomErrorResponse();
 		customErrorResponse.setLocalDateTime(LocalDateTime.now(Clock.systemUTC()));
 		customErrorResponse.setError(exception.getBindingResult().getFieldError().getDefaultMessage());
-		customErrorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+		customErrorResponse.setStatus(HttpStatus.BAD_GATEWAY.value());
 		return new ResponseEntity<CustomErrorResponse>(customErrorResponse, HttpStatus.BAD_GATEWAY);
 
 	}

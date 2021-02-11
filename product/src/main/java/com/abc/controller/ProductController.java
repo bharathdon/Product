@@ -30,7 +30,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*")
-
 public class ProductController {
 
 	@Autowired
@@ -70,7 +69,7 @@ public class ProductController {
 	public ResponseEntity<Product> updateProduct(
 			@Parameter(description = "name of product") @PathVariable("pname") String pname,
 			@Parameter(description = "id of a product") @PathVariable("pid") Integer pid) throws SQLException {
-		productService.updateProduct(pname, pid);
+		int product = productService.updateProduct(pname, pid);
 		return new ResponseEntity<Product>(HttpStatus.OK);
 	}
 
