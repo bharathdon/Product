@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-//add the mockito-inline dependency in om.xml extenally
+//add the mockito-inline dependency in om.xml extenally for testing static methods
 
 /*<dependency>
 <groupId>org.mockito</groupId>
